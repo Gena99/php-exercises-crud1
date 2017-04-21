@@ -18,7 +18,7 @@ SELECT lastName, firstName FROM colyseum.clients WHERE lastName LIKE'M%';
 SELECT title,performer,date,startTime FROM colyseum.shows ORDER BY title;
 
 -- exo  7
-SELECT lastName, firstName, birthDate, IF(cardTypesId=1,'oui','non') as carteFidelite, cards.cardNumber
+SELECT lastName AS Nom, firstName, birthDate, IF(cardTypesId=1,'oui','non') as carteFidelite, cards.cardNumber
 FROM colyseum.clients 
 	LEFT JOIN colyseum.cards ON colyseum.clients.cardNumber = colyseum.cards.cardNumber AND cardTypesId=1
     -- WHERE cardTypesId = 1

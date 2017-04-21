@@ -78,20 +78,18 @@ foreach ($resulttitreSpectacle as $row){
 }
 
 echo '<h2>Exo 7 : Afficher tous les clients avec nom prenom etc..</h2>';
-$requestTousLesClients = "SELECT lastName,firstName,birthDate,cards.cardNumber,cardTypesId FROM colyseum.clients LEFT JOIN colyseum.cards ON colyseum.clients.cardNumber = colyseum.cards.cardNumber AND cardTypesId = 1";
+$requestTousLesClients = "SELECT lastName, firstName, birthDate
+, IF(cardTypesId=1,'oui','non') as carteFidelite, cards.cardNumber
+FROM colyseum.clients 
+LEFT JOIN colyseum.cards ON colyseum.clients.cardNumber = colyseum.cards.cardNumber AND cardTypesId=1";
 $resultTousClients = $connexion->query($requestTousLesClients);
 foreach ($resultTousClients as $row) {
 	print 'Nom : '.$row['firstName'].'<br />';
 	print 'Prénom : '.$row['lastName'].'<br />';
 	print 'Date de naissance : '.$row['birthDate'].'<br />';
+	print 'Carte fidélité : ' .$row ['carteFidelite'].'<br />';
+	print 'numéro de carte : '.$row['cardNumber'].'<br />';
 	
-	
-	if($row['cardTypesId']==1){
-		print 'Carte fidélité : oui' .$row ['id'].'<br />';
-		print 'numéro de carte : '.$row['cardNumber'].'<br />';
-	}else{
-		print 'Carte fidélité : non' .$row ['id'].'<br />';
-	}
 	echo '<br />';
 }
 
